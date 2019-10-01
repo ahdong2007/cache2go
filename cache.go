@@ -19,13 +19,19 @@ var (
 
 // Cache returns the existing cache table with given name or creates a new one
 // if the table does not exist yet.
+<<<<<<< HEAD
 // CacheTable存在则返回，不存在则创建
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func Cache(table string) *CacheTable {
 	mutex.RLock()
 	t, ok := cache[table]
 	mutex.RUnlock()
 
+<<<<<<< HEAD
 	// 如果该Table不存在，则创建
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 	if !ok {
 		mutex.Lock()
 		t, ok = cache[table]

@@ -15,7 +15,10 @@ import (
 )
 
 // CacheTable is a table within the cache
+<<<<<<< HEAD
 // CacheTable可类比rdbms中的表，CacheItem类比表中的行
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 type CacheTable struct {
 	sync.RWMutex
 
@@ -25,17 +28,25 @@ type CacheTable struct {
 	items map[interface{}]*CacheItem
 
 	// Timer responsible for triggering cleanup.
+<<<<<<< HEAD
 	// 什么时候触发cleanup
 	cleanupTimer *time.Timer
 
 	// Current timer duration.
 	// 两次cleanup之间的间隔
+=======
+	cleanupTimer *time.Timer
+	// Current timer duration.
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 	cleanupInterval time.Duration
 
 	// The logger used for this table.
 	logger *log.Logger
 
+<<<<<<< HEAD
 	// dml操作回调函数
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 	// Callback method triggered when trying to load a non-existing key.
 	loadData func(key interface{}, args ...interface{}) *CacheItem
 	// Callback method triggered when adding a new item to the cache.
@@ -45,7 +56,10 @@ type CacheTable struct {
 }
 
 // Count returns how many items are currently stored in the cache.
+<<<<<<< HEAD
 // 计算CacheTable的item数，也及该CacheTable下的key/val对数
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func (table *CacheTable) Count() int {
 	table.RLock()
 	defer table.RUnlock()
@@ -74,8 +88,11 @@ func (table *CacheTable) SetDataLoader(f func(interface{}, ...interface{}) *Cach
 // SetAddedItemCallback configures a callback, which will be called every time
 // a new item is added to the cache.
 func (table *CacheTable) SetAddedItemCallback(f func(*CacheItem)) {
+<<<<<<< HEAD
 
 	// 如果已存在回调函数，则置空
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 	if len(table.addedItem) > 0 {
 		table.RemoveAddedItemCallbacks()
 	}
@@ -153,7 +170,10 @@ func (table *CacheTable) expirationCheck() {
 		accessedOn := item.accessedOn
 		item.RUnlock()
 
+<<<<<<< HEAD
 		// lifeSpan为0表示永不过期
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 		if lifeSpan == 0 {
 			continue
 		}
@@ -178,7 +198,10 @@ func (table *CacheTable) expirationCheck() {
 	table.Unlock()
 }
 
+<<<<<<< HEAD
 // addInternal，不判断key是否存在，而是直接覆盖
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func (table *CacheTable) addInternal(item *CacheItem) {
 	// Careful: do not run this method unless the table-mutex is locked!
 	// It will unlock it for the caller before running the callbacks and checks
@@ -271,8 +294,11 @@ func (table *CacheTable) Exists(key interface{}) bool {
 
 // NotFoundAdd checks whether an item is not yet cached. Unlike the Exists
 // method this also adds data if the key could not be found.
+<<<<<<< HEAD
 // 和Exists不同，EXists仅判断是否存在
 // NotFoundAdd 是不存在则添加
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func (table *CacheTable) NotFoundAdd(key interface{}, lifeSpan time.Duration, data interface{}) bool {
 	table.Lock()
 
@@ -316,7 +342,10 @@ func (table *CacheTable) Value(key interface{}, args ...interface{}) (*CacheItem
 }
 
 // Flush deletes all items from this cache table.
+<<<<<<< HEAD
 // 清空CacheTable
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func (table *CacheTable) Flush() {
 	table.Lock()
 	defer table.Unlock()
@@ -340,13 +369,19 @@ type CacheItemPair struct {
 // Interface to sort by AccessCount.
 type CacheItemPairList []CacheItemPair
 
+<<<<<<< HEAD
 // 三个函数用于下面sort.Sort
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func (p CacheItemPairList) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 func (p CacheItemPairList) Len() int           { return len(p) }
 func (p CacheItemPairList) Less(i, j int) bool { return p[i].AccessCount > p[j].AccessCount }
 
 // MostAccessed returns the most accessed items in this cache table
+<<<<<<< HEAD
 // 超过一定访问次数的CacheItems
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func (table *CacheTable) MostAccessed(count int64) []*CacheItem {
 	table.RLock()
 	defer table.RUnlock()

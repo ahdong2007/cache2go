@@ -22,8 +22,11 @@ type CacheItem struct {
 	// The item's data.
 	data interface{}
 	// How long will the item live in the cache when not being accessed/kept alive.
+<<<<<<< HEAD
 	// TTL，超过lifeSpan时间，如果item没有被访问则会被删除
 	// lifeSpan 为0表示item不过期
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 	lifeSpan time.Duration
 
 	// Creation timestamp.
@@ -42,7 +45,10 @@ type CacheItem struct {
 // Parameter lifeSpan determines after which time period without an access the item
 // will get removed from the cache.
 // Parameter data is the item's value.
+<<<<<<< HEAD
 // NewCacheItem不判断key是否已经存在。这里是否会有问题？
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func NewCacheItem(key interface{}, lifeSpan time.Duration, data interface{}) *CacheItem {
 	t := time.Now()
 	return &CacheItem{
@@ -57,7 +63,10 @@ func NewCacheItem(key interface{}, lifeSpan time.Duration, data interface{}) *Ca
 }
 
 // KeepAlive marks an item to be kept for another expireDuration period.
+<<<<<<< HEAD
 // 更新最后被访问的时间，同时更新被访问次数
+=======
+>>>>>>> 2a8c15562e12cca7e1fb5997eb43297bd64a3379
 func (item *CacheItem) KeepAlive() {
 	item.Lock()
 	defer item.Unlock()
